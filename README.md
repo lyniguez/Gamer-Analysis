@@ -3,6 +3,7 @@
 ```python
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 ```
 
 
@@ -94,8 +95,8 @@ purchasedataDF.head()
 
 
 
-Player Count
-Total Number of Players
+## Player Count
+* Total Number of Players
 
 
 ```python
@@ -142,15 +143,11 @@ playercountDF
 
 
 
-Purchasing Analysis (Total)
-
-Number of Unique Items
-
-Average Purchase Price
-
-Total Number of Purchases
-
-Total Revenue
+## Purchasing Analysis (Total)
+* Number of Unique Items
+* Average Purchase Price
+* Total Number of Purchases
+* Total Revenue
 
 
 ```python
@@ -231,13 +228,10 @@ purchanalysisDF
 
 
 
-Gender Demographics
-
-Percentage and Count of Male Players
-
-Percentage and Count of Female Players
-
-Percentage and Count of Other / Non-Disclosed
+## Gender Demographics
+* Percentage and Count of Male Players
+* Percentage and Count of Female Players
+* Percentage and Count of Other / Non-Disclosed
 
 
 ```python
@@ -271,8 +265,13 @@ percentother = (othercount / playercount)*100
 
 
 ```python
+gendertypes = purchasedataDF["Gender"].unique()
+```
+
+
+```python
 #Create new Data Frame with Gender Analysis
-gendhanalysisDF = pd.DataFrame({"Gender":["Male","Female","Other / Non-Disclosed"],
+gendhanalysisDF = pd.DataFrame({"Gender":gendertypes,
     "Percentage of Players":[percentmale, percentfemale, percentother],
     "Total Count":[malecount,femalecount,othercount]})
 gendhanalysisDF["Percentage of Players"] = gendhanalysisDF["Percentage of Players"].map("{0:,.2f}%".format)
@@ -331,17 +330,12 @@ gendhanalysisDF.set_index(["Gender"])
 
 
 
-Purchasing Analysis (Gender)
+## Purchasing Analysis (Gender)
+* The below each broken by gender
+* Purchase Count
+* Average Purchase Price
+* Total Purchase Value
 
-The below each broken by gender
-
-Purchase Count
-
-Average Purchase Price
-
-Total Purchase Value
-
-Normalized Totals
 
 
 ```python
@@ -391,7 +385,7 @@ othertotal = othertotal["Price"].sum()
 
 ```python
 #Create new Data Frame with Gender Analysis
-genpurchanalysisDF = pd.DataFrame({"Gender":["Male","Female","Other/Non-Disclosed"],
+genpurchanalysisDF = pd.DataFrame({"Gender":gendertypes,
     "Purchase Count":[malepurchase, femalepurchase, otherpurchase],
     "Average Purchase Price":[maleaverage, femaleaverage, otheraverage],                                 
     "Total Purchase Value":[maletotal, femaletotal, othertotal]})
@@ -446,7 +440,7 @@ genpurchanalysisDF.set_index(["Gender"])
       <td>$382.91</td>
     </tr>
     <tr>
-      <th>Other/Non-Disclosed</th>
+      <th>Other / Non-Disclosed</th>
       <td>$3.25</td>
       <td>11</td>
       <td>$35.74</td>
@@ -457,17 +451,11 @@ genpurchanalysisDF.set_index(["Gender"])
 
 
 
-Age Demographics
-
-The below each broken into bins of 4 years (i.e. <10, 10-14, 15-19, etc.)
-
-Purchase Count
-
-Average Purchase Price
-
-Total Purchase Value
-
-Normalized Totals
+## Age Demographics
+* The below each broken into bins of 4 years (i.e. <10, 10-14, 15-19, etc.)
+* Purchase Count
+* Average Purchase Price
+* Total Purchase Value
 
 
 ```python
@@ -476,6 +464,7 @@ bins = [0, 10, 15, 20, 25, 30, 35, 100]
 
 # Create the names for the bins
 group_names = ['< 10', '10 - 14', '15 - 19 ', '20 - 24', '25 - 29', '30 - 34', '35 +']
+
 ```
 
 
@@ -576,127 +565,139 @@ purchasedataDF.head()
 
 ```python
 #percentage of players and count of players by bins
-bincount = pd.DataFrame(purchasedataDF["Age Group"].value_counts())
-binpercent = pd.DataFrame((bincount/playercount)*100)
+#bincount = pd.DataFrame(purchasedataDF["Age Group"].value_counts())
+#binpercent = pd.DataFrame((bincount/playercount)*100)
 
-print(bincount)
-
-print(binpercent)
-
+#AgeDF = pd.DataFrame({
+#    "Count":bincount,
+#    "Percent":binpercent})
+#AgeDF
 ```
-
-              Age Group
-    20 - 24         305
-    15 - 19         184
-    10 - 14          78
-    25 - 29          76
-    30 - 34          58
-    35 +             47
-    < 10             32
-              Age Group
-    20 - 24   53.228621
-    15 - 19   32.111693
-    10 - 14   13.612565
-    25 - 29   13.263525
-    30 - 34   10.122164
-    35 +       8.202443
-    < 10       5.584642
-    
 
 
 ```python
 #item count per group
 groupitemcount = purchasedataDF.groupby("Age Group")["Item Name"].count()
-groupitemcount
 ```
-
-
-
-
-    Age Group
-    10 - 14      78
-    15 - 19     184
-    20 - 24     305
-    25 - 29      76
-    30 - 34      58
-    35 +         47
-    < 10         32
-    Name: Item Name, dtype: int64
-
-
 
 
 ```python
 #price average per group
 grouppriceaverage = purchasedataDF.groupby("Age Group")["Price"].mean()
-grouppriceaverage
 ```
-
-
-
-
-    Age Group
-    10 - 14     2.873718
-    15 - 19     2.873587
-    20 - 24     2.959377
-    25 - 29     2.892368
-    30 - 34     3.073448
-    35 +        2.896383
-    < 10        3.019375
-    Name: Price, dtype: float64
-
-
 
 
 ```python
 #total purchase per group
 groupsumvalue = purchasedataDF.groupby("Age Group")["Price"].sum()
-groupsumvalue
 ```
-
-
-
-
-    Age Group
-    10 - 14     224.15
-    15 - 19     528.74
-    20 - 24     902.61
-    25 - 29     219.82
-    30 - 34     178.26
-    35 +        136.13
-    < 10         96.62
-    Name: Price, dtype: float64
-
-
 
 
 ```python
 #Create new Data Frame with Age Groups Analytics
-#AgeDemographics = pd.DataFrame({"Age Groups":['< 10', '10 - 14', '15 - 19 ', '20 - 24', '25 - 29', '30 - 34', '35 +'],
-#    "Percentage of Players":[grouppriceaverage],
-#    "Average Price":[grouppriceaverage],
-#    "Total Count":[groupsumvalue]})
-#AgeDemographics.set_index(["Age Groups"])
+AgeDemographics = pd.DataFrame({
+    "Item Count":groupitemcount,
+    "Average Price":grouppriceaverage,
+    "Total Revenue":groupsumvalue})
+
+AgeDemographics["Average Price"] = AgeDemographics["Average Price"].map("${0:,.2f}".format)
+AgeDemographics["Total Revenue"] = AgeDemographics["Total Revenue"].map("${0:,.2f}".format)
+AgeDemographics
 ```
 
-Top Spenders
 
-Identify the the top 5 spenders in the game by total purchase value, then list (in a table):
 
-SN
 
-Purchase Count
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
 
-Average Purchase Price
+    .dataframe thead th {
+        text-align: left;
+    }
 
-Total Purchase Value
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Average Price</th>
+      <th>Item Count</th>
+      <th>Total Revenue</th>
+    </tr>
+    <tr>
+      <th>Age Group</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10 - 14</th>
+      <td>$2.87</td>
+      <td>78</td>
+      <td>$224.15</td>
+    </tr>
+    <tr>
+      <th>15 - 19</th>
+      <td>$2.87</td>
+      <td>184</td>
+      <td>$528.74</td>
+    </tr>
+    <tr>
+      <th>20 - 24</th>
+      <td>$2.96</td>
+      <td>305</td>
+      <td>$902.61</td>
+    </tr>
+    <tr>
+      <th>25 - 29</th>
+      <td>$2.89</td>
+      <td>76</td>
+      <td>$219.82</td>
+    </tr>
+    <tr>
+      <th>30 - 34</th>
+      <td>$3.07</td>
+      <td>58</td>
+      <td>$178.26</td>
+    </tr>
+    <tr>
+      <th>35 +</th>
+      <td>$2.90</td>
+      <td>47</td>
+      <td>$136.13</td>
+    </tr>
+    <tr>
+      <th>&lt; 10</th>
+      <td>$3.02</td>
+      <td>32</td>
+      <td>$96.62</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+## Top Spenders
+* Identify the the top 5 spenders in the game by total purchase value, then list (in a table):
+* SN
+* Purchase Count
+* Average Purchase Price
+* Total Purchase Value
 
 
 ```python
 # groupby SN, sum the price, and then reset index
 SNtop5sum = pd.DataFrame(purchasedataDF.groupby("SN")["Price"].sum())
 SNtop5sum.reset_index(inplace = True)
-
 ```
 
 
@@ -704,7 +705,6 @@ SNtop5sum.reset_index(inplace = True)
 # groupby SN, count the price, and then reset index
 SNtop5count = pd.DataFrame(purchasedataDF.groupby("SN")["Price"].count())
 SNtop5count.reset_index(inplace = True)
-
 ```
 
 
@@ -712,7 +712,6 @@ SNtop5count.reset_index(inplace = True)
 # groupby SN, mean of the price, and then reset index
 SNtop5mean = pd.DataFrame(purchasedataDF.groupby("SN")["Price"].mean())
 SNtop5mean.reset_index(inplace = True)
-
 ```
 
 
@@ -798,21 +797,13 @@ mergeSN2.head(5)
 
 
 
-Most Popular Items
-
-
-Identify the 5 most popular items by purchase count, then list (in a table):
-
-Item ID
-
-Item Name
-
-
-Purchase Count
-
-Item Price
-
-Total Purchase Value
+## Most Popular Items
+* Identify the 5 most popular items by purchase count, then list (in a table):
+* Item ID
+* Item Name
+* Purchase Count
+* Item Price
+* Total Purchase Value
 
 
 ```python
@@ -927,20 +918,13 @@ mergeItemTableDup.head()
 
 
 
-Most Profitable Items
-
-
-Identify the 5 most profitable items by total purchase value, then list (in a table):
-    
-Item ID
-
-Item Name
-
-Purchase Count
-
-Item Price
-
-Total Purchase Value
+## Most Profitable Items
+* Identify the 5 most profitable items by total purchase value, then list (in a table):
+* Item ID
+* Item Name
+* Purchase Count
+* Item Price
+* Total Purchase Value
 
 
 ```python
@@ -1055,12 +1039,3 @@ profitmergeTable.head()
 </div>
 
 
-Main.ipynb is the code for the homework assignment for now.
-README.md has been added
-
-Three Observable Trends based on the Analysis
-1. Males are by far the most significant demographic more amount than females and others. They make up more than 80% of the players and account for more then 80% of the total revenue.
-
-2. Players from the ages of 20-24 spend are 50% of the player base and spend the most of all age groups.
-
-3. Items priced over $4 make the most revenue despite not having as many sales. For example the most sold item Arcane Gem at a price of $2.23 sold 11 times but only grossed $24.53 in revenue. The most profitable item Orenmir at $4.95 an item only sold 6 times but generated $29.70 in revenue. Raising the price of some items may lead to a higher revenue total.
