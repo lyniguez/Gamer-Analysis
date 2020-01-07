@@ -1,4 +1,4 @@
-### Three Observable Trends based on the Analysis
+## Three Observable Trends based on the Analysis
 
 1. Males are by far the most significant demographic more amount than females and others. They make up more than 80% of the players and account for more then 80% of the total revenue.
 
@@ -7,7 +7,7 @@
 
 3. Items priced over 4 dollars make the most revenue despite not having as many sales. For example the most sold item Arcane Gem at a price of 2.23 sold 11 times but only grossed 24.53 in revenue. The most profitable item Orenmir at 4.95 an item only sold 6 times but generated 29.70 in revenue. Raising the price of some items may lead to a higher revenue total.
 
-## Python code below imports purchase data .json file
+### Python code shows the analysis done after importing purchase data .json file 
 
 ```python
 import pandas as pd
