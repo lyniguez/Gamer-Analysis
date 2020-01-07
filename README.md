@@ -1,3 +1,11 @@
+### Three Observable Trends based on the Analysis
+
+1. Males are by far the most significant demographic more amount than females and others. They make up more than 80% of the players and account for more then 80% of the total revenue.
+
+2. Players from the ages of 20-24 spend are 50% of the player base and spend the most of all age groups.
+
+
+3. Items priced over 4 dollars make the most revenue despite not having as many sales. For example the most sold item Arcane Gem at a price of 2.23 sold 11 times but only grossed 24.53 in revenue. The most profitable item Orenmir at 4.95 an item only sold 6 times but generated 29.70 in revenue. Raising the price of some items may lead to a higher revenue total.
 
 
 ```python
@@ -1039,12 +1047,3 @@ profitmergeTable.head()
 </div>
 
 
-
-### Three Observable Trends based on the Analysis
-
-1. Males are by far the most significant demographic more amount than females and others. They make up more than 80% of the players and account for more then 80% of the total revenue.
-
-2. Players from the ages of 20-24 spend are 50% of the player base and spend the most of all age groups.
-
-
-3. Items priced over 4 dollars make the most revenue despite not having as many sales. For example the most sold item Arcane Gem at a price of 2.23 sold 11 times but only grossed 24.53 in revenue. The most profitable item Orenmir at 4.95 an item only sold 6 times but generated 29.70 in revenue. Raising the price of some items may lead to a higher revenue total.
