@@ -7,6 +7,7 @@
 
 3. Items priced over 4 dollars make the most revenue despite not having as many sales. For example the most sold item Arcane Gem at a price of 2.23 sold 11 times but only grossed 24.53 in revenue. The most profitable item Orenmir at 4.95 an item only sold 6 times but generated 29.70 in revenue. Raising the price of some items may lead to a higher revenue total.
 
+## Python code below imports purchase data .json file
 
 ```python
 import pandas as pd
